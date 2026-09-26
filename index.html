@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priti's Pure Magic • Artisanal Mithai & Bakehouse</title>
+  <meta name="description" content="Handmade small-batch Indian sweets, mava cakes, spiced cupcakes, and artisanal fudge crafted with slow-simmered dairy and botanical spices." />
+
+  <!-- Google Fonts: Fraunces (Display Serif) & Manrope (Clean Grotesk) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & ARTISANAL TOKENS (8px Modular Spacing & Strict Palette)
+       ========================================================================== */
+    :root {
+      /* Core Strict Palette */
+      --color-cocoa: #2B1710;
+      --color-cocoa-deep: #1A0D08;
+      --color-cocoa-light: #4A2E24;
+      --color-cocoa-muted: #6B4E44;
+      --color-cream: #FBF3E7;
+      --color-cream-soft: #F5EADA;
+      --color-cream-muted: #EAD8C3;
+      --color-cream-card: #FAF1E4;
+
+      /* Intentional Section-Dominant Accents */
+      --color-marigold: #B8562E;
+      --color-marigold-hover: #9E4521;
+      --color-marigold-subtle: rgba(184, 86, 46, 0.08);
+      --color-pistachio: #5E6936; /* Accessible WCAG AA on light cream (5.2:1) */
+      --color-pistachio-light: #8E9B5B;
+      --color-pistachio-dark-ui: #9FB06D; /* High contrast on dark cocoa */
+      --color-turmeric: #D4A24C;
+      --color-turmeric-soft: #E8C380;
+      --color-turmeric-deep: #8F6413; /* Accessible text version on light backgrounds */
+
+      /* Subtle Architectural Borders */
+      --color-border: rgba(43, 23, 16, 0.12);
+      --color-border-subtle: rgba(43, 23, 16, 0.06);
+      --color-border-light: rgba(251, 243, 231, 0.16);
+
+      /* Typography Tokens */
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* 8px Base Modular Spacing Scale */
+      --space-1: 0.5rem;   /* 8px */
+      --space-2: 1rem;     /* 16px */
+      --space-3: 1.5rem;   /* 24px */
+      --space-4: 2rem;     /* 32px */
+      --space-5: 2.5rem;   /* 40px */
+      --space-6: 3rem;     /* 48px */
+      --space-8: 4rem;     /* 64px */
+      --space-10: 5rem;    /* 80px */
+      --space-12: 6rem;    /* 96px */
+      --space-16: 8rem;    /* 128px */
+
+      /* Layout Measure & Spatial Rhythm */
+      --gutter: clamp(1.25rem, 3.5vw, 3.5rem);
+      --section-pad-y: clamp(4.5rem, 8vw, 7.5rem);
+      --header-height: 76px;
+      --max-width-content: 1320px;
+      --line-length-body: 68ch;
+      --line-length-narrow: 56ch;
+
+      /* Transitions & Easing */
+      --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+      --trans-fast: 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      --trans-base: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-cream);
+      color: var(--color-cocoa);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--color-cream);
+      color: var(--color-cocoa);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Subtle Warm Handmade Paper Noise Grain Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: multiply;
+      opacity: 0.75;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--trans-fast);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* Accessibility Focus States */
+    :focus-visible {
+      outline: 2px solid var(--color-marigold);
+      outline-offset: 4px;
+    }
+
+    /* ==========================================================================
+       TOP NAVIGATION & CHAPTER RAIL
+       ========================================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      z-index: 100;
+      color: var(--color-cream);
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+      mix-blend-mode: normal;
+    }
+
+    .site-header.scrolled {
+      background-color: rgba(251, 243, 231, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-cocoa);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-monogram {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--color-cocoa);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+    .brand-monogram img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .header-chapter-indicator {
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--color-cocoa);
+      opacity: 0.75;
+    }
+
+    @media (min-width: 768px) {
+      .header-chapter-indicator {
+        display: flex;
+      }
+    }
+
+    .header-chapter-indicator .separator {
+      width: 24px;
+      height: 1px;
+      background-color: currentColor;
+      opacity: 0.4;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .btn-header-order {
+      display: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.6rem 1.25rem;
+      background-color: var(--color-cocoa);
+      color: var(--color-cream);
+      border-radius: 2px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-header-order:hover {
+      background-color: var(--color-marigold);
+      transform: translateY(-1px);
+    }
+
+    @media (min-width: 640px) {
+      .btn-header-order {
+        display: inline-block;
+      }
+    }
+
+    .menu-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.5rem 0.75rem;
+      color: inherit;
+    }
+
+    .menu-hamburger {
+      width: 20px;
+      height: 14px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: currentColor;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle-btn.open .menu-hamburger span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .menu-toggle-btn.open .menu-hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle-btn.open .menu-hamburger span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* Fixed Side Chapter Rail (Reference Style) */
+    .chapter-rail {
+      position: fixed;
+      right: clamp(1rem, 2.5vw, 2.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: none;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 1024px) {
+      .chapter-rail {
+        display: flex;
+      }
+    }
+
+    .rail-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      color: var(--color-cocoa);
+      opacity: 0.35;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .rail-label {
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .rail-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+      transition: transform 0.3s ease, background-color 0.3s ease, width 0.3s ease;
+    }
+
+    .rail-item:hover, .rail-item.active {
+      opacity: 1;
+    }
+
+    .rail-item:hover .rail-label, .rail-item.active .rail-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .rail-item.active .rail-indicator {
+      transform: scale(1.6);
+      background-color: var(--color-marigold);
+    }
+
+    .chapter-rail.on-dark .rail-item {
+      color: var(--color-cream);
+    }
+
+    .chapter-rail.on-dark .rail-item .rail-label {
+      color: var(--color-cream);
+    }
+
+    .chapter-rail.on-dark .rail-item.active .rail-indicator {
+      background-color: var(--color-turmeric);
+    }
+
+    /* Fullscreen Chapter Drawer / Overlay */
+    .chapter-drawer {
+      position: fixed;
+      inset: 0;
+      background-color: var(--color-cocoa-deep);
+      color: var(--color-cream);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s var(--ease-editorial);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(var(--header-height) + 1.5rem) var(--gutter) clamp(2rem, 5vh, 4rem);
+    }
+
+    .chapter-drawer.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto 0;
+    }
+
+    @media (min-width: 768px) {
+      .drawer-grid {
+        grid-template-columns: 2fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .drawer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .drawer-nav-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: rgba(251, 243, 231, 0.65);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .drawer-nav-link .chapter-num {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--color-turmeric);
+    }
+
+    .drawer-nav-link:hover, .drawer-nav-link:focus-visible {
+      color: var(--color-cream);
+      transform: translateX(12px);
+    }
+
+    .drawer-meta {
+      border-top: 1px solid var(--color-border-light);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .drawer-meta {
+        border-top: none;
+        border-left: 1px solid var(--color-border-light);
+        padding-top: 0;
+        padding-left: 2.5rem;
+      }
+    }
+
+    .drawer-meta-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-turmeric);
+      font-weight: 700;
+    }
+
+    .drawer-contact-lines {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(251, 243, 231, 0.85);
+    }
+
+    /* ==========================================================================
+       CHAPTER 01: HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(var(--header-height) + 2rem) var(--gutter) clamp(2rem, 4vh, 3.5rem);
+      background-color: var(--color-cocoa-deep);
+      color: var(--color-cream);
+      overflow: hidden;
+    }
+
+    .hero-bg-media {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* High quality food photography with dark warm grading overlay */
+    .hero-bg-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.62) contrast(1.1) saturate(0.95);
+      transform: scale(1.05);
+      transition: transform 8s var(--ease-editorial);
+    }
+
+    .hero-bg-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.62) contrast(1.1) saturate(0.95);
+      transform: scale(1.05);
+      transition: transform 8s var(--ease-editorial);
+    }
+
+.hero-section:hover .hero-bg-media video {
+  transform: scale(1.0);
+}
+
+    .hero-section:hover .hero-bg-media img {
+      transform: scale(1.0);
+    }
+
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(43, 23, 16, 0.35) 0%, rgba(26, 13, 8, 0.88) 100%),
+                  linear-gradient(to bottom, rgba(26, 13, 8, 0.4) 0%, transparent 40%, rgba(26, 13, 8, 0.8) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 1100px;
+      margin: auto auto;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .hero-pretitle {
+      display: inline-block;
+      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--color-turmeric);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroEntrance 1s var(--ease-editorial) forwards 0.2s;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 8vw, 6.75rem);
+      font-weight: 300;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.75rem;
+      color: var(--color-cream);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroEntrance 1.1s var(--ease-editorial) forwards 0.4s;
+    }
+
+    .hero-title em {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-turmeric-soft);
+    }
+
+    .hero-tagline {
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(251, 243, 231, 0.88);
+      opacity: 0;
+      transform: translateY(25px);
+      animation: heroEntrance 1s var(--ease-editorial) forwards 0.6s;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroEntrance 1s var(--ease-editorial) forwards 0.8s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background-color: var(--color-marigold);
+      color: var(--color-cream);
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 1.1rem 2.2rem;
+      border-radius: 2px;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 24px rgba(184, 86, 46, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-marigold-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(184, 86, 46, 0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border: 1px solid rgba(251, 243, 231, 0.4);
+      color: var(--color-cream);
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 1.1rem 2rem;
+      border-radius: 2px;
+      background: rgba(251, 243, 231, 0.05);
+      backdrop-filter: blur(8px);
+      transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-cream);
+      background: rgba(251, 243, 231, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .hero-footer-bar {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-top: 1px solid rgba(251, 243, 231, 0.15);
+      padding-top: 1.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: heroEntrance 1s var(--ease-editorial) forwards 1s;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .hero-meta-item span:first-child {
+      color: var(--color-turmeric);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .hero-scroll-cue {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      color: var(--color-cream);
+      transition: opacity 0.3s ease;
+    }
+
+    .hero-scroll-cue:hover {
+      opacity: 0.75;
+    }
+
+    .scroll-indicator-line {
+      width: 32px;
+      height: 1px;
+      background-color: var(--color-turmeric);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-indicator-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-cream);
+      transform: translateX(-100%);
+      animation: scrollLineMove 2s infinite ease-in-out;
+    }
+
+    @keyframes scrollLineMove {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes heroEntrance {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==========================================================================
+       SECTION UTILITIES & REVEAL SYSTEM
+       ========================================================================== */
+    .chapter-section {
+      padding: var(--section-pad-y) 0;
+      position: relative;
+      background-color: var(--color-cream);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    .section-header-compact {
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .chapter-tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-marigold);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chapter-tag::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 1px;
+      background-color: currentColor;
+    }
+
+    .section-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--color-cocoa);
+    }
+
+    .section-headline em {
+      font-style: italic;
+      color: var(--color-marigold);
+    }
+
+    /* Reveal animations controlled via IntersectionObserver */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s var(--ease-editorial), transform 0.9s var(--ease-editorial);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger helpers */
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ==========================================================================
+       CHAPTER 02: ABOUT / STORY
+       ========================================================================== */
+    .about-editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .about-editorial-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+    }
+
+    .about-story-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .about-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--color-cocoa);
+      border-left: 2px solid var(--color-marigold);
+      padding-left: clamp(1.2rem, 2.5vw, 2rem);
+    }
+
+    .about-paragraph {
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      line-height: 1.8;
+      color: var(--color-cocoa-light);
+    }
+
+    .about-signature {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .signature-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background-color: var(--color-cream-soft);
+      border: 1px solid var(--color-turmeric);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--color-marigold);
+      font-size: 1.25rem;
+    }
+
+    .signature-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .signature-text h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .signature-text p {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-pistachio);
+      font-weight: 600;
+    }
+
+    .about-visual-frame {
+      position: relative;
+    }
+
+    .about-image-wrapper {
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(43, 23, 16, 0.1);
+      aspect-ratio: 4/5;
+      background-color: var(--color-cream-muted);
+    }
+
+    .about-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s var(--ease-editorial);
+    }
+
+    .about-image-wrapper:hover img {
+      transform: scale(1.04);
+    }
+
+    .about-floating-stamp {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background-color: var(--color-cocoa);
+      color: var(--color-cream);
+      padding: 1.5rem;
+      border-radius: 2px;
+      box-shadow: 0 12px 30px rgba(43, 23, 16, 0.25);
+      max-width: 200px;
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      .about-floating-stamp {
+        display: block;
+      }
+    }
+
+    .stamp-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-turmeric);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .stamp-value {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      line-height: 1.3;
+    }
+
+    /* ==========================================================================
+       CHAPTER 03: THE COLLECTION (ALTERNATING EDITORIAL PANELS)
+       ========================================================================== */
+    .collection-section {
+      padding-top: var(--section-pad-y);
+      padding-bottom: var(--section-pad-y);
+      background-color: var(--color-cream-soft);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .collection-panels-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4rem, 10vw, 8rem);
+    }
+
+    .collection-panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .collection-panel {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .collection-panel.reverse {
+        direction: rtl;
+      }
+
+      .collection-panel.reverse > * {
+        direction: ltr;
+      }
+    }
+
+    .panel-media-container {
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+      aspect-ratio: 16/11;
+      background-color: var(--color-cream-muted);
+      box-shadow: 0 16px 36px rgba(43, 23, 16, 0.08);
+    }
+
+    .panel-media-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s var(--ease-editorial);
+    }
+
+    .panel-media-container:hover img {
+      transform: scale(1.04);
+    }
+
+    .panel-badge {
+      position: absolute;
+      top: 1.25rem;
+      left: 1.25rem;
+      background-color: rgba(43, 23, 16, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--color-cream);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      border: 1px solid rgba(251, 243, 231, 0.2);
+    }
+
+    .panel-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+
+    .panel-num {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-pistachio);
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--color-cocoa);
+    }
+
+    .panel-desc {
+      font-size: clamp(1rem, 1.2vw, 1.1rem);
+      line-height: 1.75;
+      color: var(--color-cocoa-light);
+      max-width: var(--line-length-body);
+    }
+
+    .panel-tasting-notes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      margin-top: 0.5rem;
+    }
+
+    .note-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .note-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-pistachio);
+      font-weight: 700;
+    }
+
+    .note-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-cocoa);
+    }
+
+    .panel-action-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-panel-inquire {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-cocoa);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .btn-panel-inquire::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-marigold);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    .btn-panel-inquire:hover::after {
+      transform: scaleX(1.2);
+    }
+
+    /* ==========================================================================
+       CHAPTER 04: CRAFT TENETS / WHY US (SEQUENTIAL SCROLL REVEALS)
+       ========================================================================== */
+    .tenets-section {
+      background-color: var(--color-cocoa-deep);
+      color: var(--color-cream);
+      padding: var(--section-pad-y) 0;
+      position: relative;
+    }
+
+    .tenets-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+    }
+
+    @media (min-width: 992px) {
+      .tenets-layout {
+        grid-template-columns: 1fr 1.6fr;
+        align-items: start;
+      }
+    }
+
+    .tenets-sticky-intro {
+      position: relative;
+    }
+
+    @media (min-width: 992px) {
+      .tenets-sticky-intro {
+        position: sticky;
+        top: calc(var(--header-height) + 3rem);
+      }
+    }
+
+    .tenets-sticky-intro .chapter-tag {
+      color: var(--color-turmeric);
+    }
+
+    .tenets-sticky-intro .section-headline {
+      color: var(--color-cream);
+      margin: 1rem 0 1.5rem;
+    }
+
+    .tenets-sticky-intro p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(251, 243, 231, 0.75);
+      margin-bottom: 2rem;
+    }
+
+    .tenets-list {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .tenet-card {
+      background: rgba(251, 243, 231, 0.04);
+      border: 1px solid rgba(251, 243, 231, 0.12);
+      padding: clamp(2rem, 3.5vw, 3rem);
+      border-radius: 2px;
+      transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+    }
+
+    .tenet-card:hover {
+      background: rgba(251, 243, 231, 0.08);
+      border-color: var(--color-turmeric);
+      transform: translateX(6px);
+    }
+
+    .tenet-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .tenet-number {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--color-turmeric);
+    }
+
+    .tenet-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--color-cream);
+    }
+
+    .tenet-description {
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: rgba(251, 243, 231, 0.82);
+    }
+
+    /* ==========================================================================
+       CHAPTER 05: SELECTION & GALLERY (VISUAL SHOWCASE)
+       ========================================================================== */
+    .gallery-section {
+      background-color: var(--color-cream);
+      padding: var(--section-pad-y) 0;
+    }
+
+    .gallery-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.6rem 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      color: var(--color-cocoa);
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--color-cocoa);
+      color: var(--color-cream);
+      border-color: var(--color-cocoa);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    @media (min-width: 640px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .gallery-card {
+      background-color: var(--color-cream-soft);
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      transition: transform 0.4s var(--ease-editorial), box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(43, 23, 16, 0.1);
+    }
+
+    .gallery-card-img-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: var(--color-cream-muted);
+    }
+
+    .gallery-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-editorial);
+    }
+
+    .gallery-card:hover .gallery-card-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .gallery-tag {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background-color: rgba(43, 23, 16, 0.85);
+      color: var(--color-cream);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border-radius: 2px;
+    }
+
+    .gallery-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .gallery-item-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--color-cocoa);
+      line-height: 1.25;
+    }
+
+    .gallery-item-caption {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--color-cocoa-light);
+    }
+
+    .gallery-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
+      font-size: 0.85rem;
+    }
+
+    .gallery-spec {
+      font-weight: 700;
+      color: var(--color-marigold);
+    }
+
+    .gallery-select-link {
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-cocoa);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* ==========================================================================
+       CHAPTER 06: CONTACT / BESPOKE ORDER
+       ========================================================================== */
+    .order-section {
+      background-color: var(--color-cream-soft);
+      border-top: 1px solid var(--color-border);
+      padding: var(--section-pad-y) 0;
+    }
+
+    .order-layout-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+    }
+
+    @media (min-width: 992px) {
+      .order-layout-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+    }
+
+    .order-info-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .order-direct-channels {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .order-direct-channels {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .channel-box {
+      background-color: var(--color-cream);
+      border: 1px solid var(--color-border);
+      padding: 1.75rem;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .channel-box:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-marigold);
+      box-shadow: 0 12px 28px rgba(43, 23, 16, 0.08);
+    }
+
+    .channel-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--color-cream-soft);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      font-size: 1.25rem;
+      color: var(--color-marigold);
+    }
+
+    .channel-icon img {
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+    }
+
+    .channel-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .channel-desc {
+      font-size: 0.88rem;
+      color: var(--color-cocoa-light);
+      line-height: 1.5;
+    }
+
+    .channel-action {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-marigold);
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Bespoke Inquiry Form */
+    .order-form-card {
+      background-color: var(--color-cream);
+      border: 1px solid var(--color-border);
+      padding: clamp(2rem, 4vw, 3rem);
+      border-radius: 2px;
+      box-shadow: 0 20px 45px rgba(43, 23, 16, 0.06);
+    }
+
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-subtitle {
+      font-size: 0.9rem;
+      color: var(--color-cocoa-light);
+      margin-bottom: 2rem;
+    }
+
+    .inquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-cocoa);
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      background-color: var(--color-cream-soft);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--color-cocoa);
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-marigold);
+      background-color: #FFFFFF;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-notice {
+      font-size: 0.78rem;
+      color: var(--color-cocoa-light);
+      line-height: 1.5;
+    }
+
+    /* Reserved Cart Extension Placeholder */
+    .cart-future-placeholder {
+      margin-top: 3.5rem;
+      padding: 2rem;
+      border: 1px dashed var(--color-border);
+      border-radius: 2px;
+      background-color: rgba(43, 23, 16, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .cart-placeholder-info h5 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-cocoa);
+      margin-bottom: 0.25rem;
+    }
+
+    .cart-placeholder-info p {
+      font-size: 0.85rem;
+      color: var(--color-cocoa-light);
+    }
+
+    .cart-engine-badge {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-pistachio);
+      background-color: var(--color-cream);
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--color-pistachio);
+      border-radius: 2px;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-cocoa-deep);
+      color: var(--color-cream);
+      padding: clamp(4rem, 8vh, 6rem) 0 2.5rem;
+      border-top: 1px solid rgba(251, 243, 231, 0.1);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 420px;
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(251, 243, 231, 0.7);
+    }
+
+    .footer-col h5 {
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-turmeric);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: rgba(251, 243, 231, 0.8);
+    }
+
+    .footer-links-list a:hover {
+      color: var(--color-cream);
+      padding-left: 4px;
+    }
+
+    .footer-bottom-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(251, 243, 231, 0.12);
+      padding-top: 2rem;
+      font-size: 0.8rem;
+      color: rgba(251, 243, 231, 0.5);
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom-bar {
+        flex-direction: row;
+      }
+    }
+
+    /* ==========================================================================
+       ACCESSIBILITY & REDUCED MOTION
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader" role="banner">
+    <a href="#hero" class="header-brand" aria-label="Priti's Bakehouse Home">
+      <div class="brand-monogram">
+        <img src="assets/logo.jpg" alt="Priti's Pure Magic logo" />
+      </div>
+      <span class="brand-name">Priti's Pure Magic</span>
+    </a>
+
+    <div class="header-chapter-indicator" aria-hidden="true">
+      <span id="headerChapterNum">01</span>
+      <span class="separator"></span>
+      <span id="headerChapterName">HERO</span>
+    </div>
+
+    <div class="header-actions">
+      <a href="#order" class="btn-header-order">Order Box</a>
+      <button class="menu-toggle-btn" id="menuToggleBtn" aria-expanded="false" aria-controls="chapterDrawer" aria-label="Toggle Chapter Navigation Menu">
+        <span>Chapters</span>
+        <div class="menu-hamburger" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- Side Chapter Rail (Editorial Reference Style) -->
+  <nav class="chapter-rail" id="chapterRail" aria-label="Page Sections Navigation">
+    <a href="#hero" class="rail-item active" data-chapter="01" data-title="HERO" aria-label="Chapter 01 Hero">
+      <span class="rail-label">01 Hero</span>
+      <span class="rail-indicator"></span>
+    </a>
+    <a href="#story" class="rail-item" data-chapter="02" data-title="OUR STORY" aria-label="Chapter 02 Our Story">
+      <span class="rail-label">02 Story</span>
+      <span class="rail-indicator"></span>
+    </a>
+    <a href="#collection" class="rail-item" data-chapter="03" data-title="THE COLLECTION" aria-label="Chapter 03 The Collection">
+      <span class="rail-label">03 Collection</span>
+      <span class="rail-indicator"></span>
+    </a>
+    <a href="#tenets" class="rail-item" data-chapter="04" data-title="CRAFT TENETS" aria-label="Chapter 04 Craft Tenets">
+      <span class="rail-label">04 Tenets</span>
+      <span class="rail-indicator"></span>
+    </a>
+    <a href="#gallery" class="rail-item" data-chapter="05" data-title="GALLERY" aria-label="Chapter 05 Gallery">
+      <span class="rail-label">05 Gallery</span>
+      <span class="rail-indicator"></span>
+    </a>
+    <a href="#order" class="rail-item" data-chapter="06" data-title="BESPOKE ORDER" aria-label="Chapter 06 Bespoke Order">
+      <span class="rail-label">06 Order</span>
+      <span class="rail-indicator"></span>
+    </a>
+  </nav>
+
+  <!-- Fullscreen Chapter Navigation Drawer -->
+  <div class="chapter-drawer" id="chapterDrawer" aria-modal="true" role="dialog">
+    <div class="drawer-grid">
+      <ul class="drawer-nav-list">
+        <li>
+          <a href="#hero" class="drawer-nav-link" data-close-drawer>
+            <span class="chapter-num">01</span>
+            <span>The Entrance</span>
+          </a>
+        </li>
+        <li>
+          <a href="#story" class="drawer-nav-link" data-close-drawer>
+            <span class="chapter-num">02</span>
+            <span>Kitchen & Heritage</span>
+          </a>
+        </li>
+        <li>
+          <a href="#collection" class="drawer-nav-link" data-close-drawer>
+            <span class="chapter-num">03</span>
+            <span>The Sweet Collection</span>
+          </a>
+        </li>
+        <li>
+          <a href="#tenets" class="drawer-nav-link" data-close-drawer>
+            <span class="chapter-num">04</span>
+            <span>Artisan Tenets</span>
+          </a>
+        </li>
+        <li>
+          <a href="#gallery" class="drawer-nav-link" data-close-drawer>
+            <span class="chapter-num">05</span>
+            <span>The Tasting Showcase</span>
+          </a>
+        </li>
+        <li>
+          <a href="#order" class="drawer-nav-link" data-close-drawer>
+            <span class="chapter-num">06</span>
+            <span>Bespoke Orders & Inquiries</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="drawer-meta">
+        <span class="drawer-meta-title">The Small-Batch Kitchen</span>
+        <div class="drawer-contact-lines">
+          <p>Fresh bakes & steamed confections dispatched daily in limited runs.</p>
+          <p style="margin-top: 0.5rem;"><strong>Inquiries:</strong> +91 98200 45678</p>
+          <p><strong>Studio:</strong> Bandra West, Mumbai</p>
+          <p><strong>Instagram:</strong> @pritispuremagic</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(251, 243, 231, 0.4);">
+      Priti's Artisanal Sweets & Pastry • Estd. 2024
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CHAPTER 01: HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="hero" data-chapter-index="01" data-chapter-name="HERO" data-theme="dark">
+    <div class="hero-bg-media">
+    <video autoplay muted loop playsinline>
+    <source src="assets/hero-video.mp4" type="video/mp4" />
+  </video>
+  </div>
+    <div class="hero-bg-overlay"></div>
+
+    <div class="hero-content">
+      <span class="hero-pretitle">Artisanal Indian Confections & Patisserie</span>
+      <h1 class="hero-title">
+        The Poetry of <em>Slow Mithai</em> & Heritage Bakes
+      </h1>
+      <p class="hero-tagline">
+        Handcrafted in small batches with cultured mava, whole saffron threads, single-estate dark cocoa, and festive nostalgia.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#collection" class="btn-primary">Explore The Collection</a>
+        <a href="#order" class="btn-secondary">Pre-Order A Hamper</a>
+      </div>
+    </div>
+
+    <div class="hero-footer-bar">
+      <div class="hero-meta-item">
+        <span>DAILY BATCH CAPACITY</span>
+        <span>24 Handcrafted Boxes</span>
+      </div>
+      <div class="hero-meta-item" style="display: none; @media(min-width: 768px){display: flex;}">
+        <span>ORIGIN</span>
+        <span>Mumbai Kitchen Studio</span>
+      </div>
+      <a href="#story" class="hero-scroll-cue" aria-label="Scroll to chapter 2">
+        <span>Scroll to Discover</span>
+        <div class="scroll-indicator-line" aria-hidden="true"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CHAPTER 02: ABOUT / STORY
+       ========================================================================== */ -->
+  <section class="chapter-section" id="story" data-chapter-index="02" data-chapter-name="OUR STORY">
+    <div class="container">
+      <div class="section-header-compact reveal-on-scroll">
+        <span class="chapter-tag">Chapter 02 • Kitchen & Heritage</span>
+        <h2 class="section-headline">Where Indian memory meets <em>patisserie precision</em></h2>
+      </div>
+
+      <div class="about-editorial-grid">
+        <div class="about-story-text">
+          <blockquote class="about-quote reveal-on-scroll">
+            "Born in a quiet home kitchen where slow-reduced mava, fragrant cardamom, and European pastry technique meet in reverence."
+          </blockquote>
+          <p class="about-paragraph reveal-on-scroll reveal-delay-1">
+            <b>Priti'sPureMagic</b> was founded on a simple longing: to taste the purity of celebratory sweets as they were made generations ago, without commercial stabilizers, artificial essences, or excess refined sugars.
+          </p>
+          <p class="about-paragraph reveal-on-scroll reveal-delay-2">
+            Every morning begins at sunrise—steaming tender ukadiche modak pleated by hand, slow-roasting cultured mava for our signature tea cakes, and hand-churning fresh fudge with single-estate cocoa and A2 bilona cow ghee.
+          </p>
+          <div class="about-signature reveal-on-scroll reveal-delay-3">
+            <div class="signature-badge">
+              <img src="assets/logo.jpg" alt="Priti's Pure Magic logo" />
+            </div>
+            <div class="signature-text">
+              <h4>Chef Priti</h4>
+              <p>Founder & Head Confectioner</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-visual-frame reveal-on-scroll reveal-delay-1">
+          <div class="about-image-wrapper">
+            <!-- PLACEHOLDER: Replace with kitchen prep/artisan kneading or steaming shot -->
+            <img
+              src="assets/chap2.jpeg"
+              alt="Artisan baker handcrafting festive delicacies"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-floating-stamp">
+            <div class="stamp-label">Craft Promise</div>
+            <div class="stamp-value">100% Preservative Free & Cooked Daily</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CHAPTER 03: THE COLLECTION (ALTERNATING EDITORIAL PANELS)
+       ========================================================================== -->
+  <section class="collection-section" id="collection" data-chapter-index="03" data-chapter-name="THE COLLECTION">
+    <div class="container">
+      <div class="section-header-compact reveal-on-scroll">
+        <span class="chapter-tag">Chapter 03 • The Sweet Collection</span>
+        <h2 class="section-headline">Curated worlds of <em>texture & nuance</em></h2>
+      </div>
+
+      <div class="collection-panels-wrapper">
+
+        <!-- Panel 01: Modak -->
+        <article class="collection-panel reveal-on-scroll">
+          <div class="panel-media-container">
+            <!-- PLACEHOLDER: Replace with ukadiche modak photo -->
+            <img
+              src="assets/chap3.1.jpeg"
+              alt="Hand-pleated Ukadiche Modak with Saffron Jaggery filling"
+              loading="lazy"
+            />
+            <span class="panel-badge">Festive Crown</span>
+          </div>
+          <div class="panel-content">
+            <span class="panel-num">01 / Steamed Confection</span>
+            <h3 class="panel-title">Ukadiche & Kesar Modak</h3>
+            <p class="panel-desc">
+              Tender, hand-pleated rice flour pouches enveloping fresh freshly grated coconut, organic Kolhapur jaggery, cardamom pods, and toasted poppy seeds. Steamed to order and served with fragrant A2 saffron ghee.
+            </p>
+            <div class="panel-tasting-notes">
+              <div class="note-item">
+                <span class="note-label">Texture</span>
+                <span class="note-value">Silk & Succulent</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Key Accent</span>
+                <span class="note-value">Kashmiri Saffron</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Box Size</span>
+                <span class="note-value">Boxes of 6 / 11 / 21</span>
+              </div>
+            </div>
+            <div class="panel-action-row">
+              <a href="#order" class="btn-panel-inquire">Inquire For This Batch →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Panel 02: Mava Cake -->
+        <article class="collection-panel reverse reveal-on-scroll">
+          <div class="panel-media-container">
+            <!-- PLACEHOLDER: Replace with Parsi cardamom mava cake photo -->
+            <img
+              src="assets/chap3.2.jpeg"
+              alt="Golden Cardamom and Pistachio Mava Cake"
+              loading="lazy"
+            />
+            <span class="panel-badge">Heritage Recipe</span>
+          </div>
+          <div class="panel-content">
+            <span class="panel-num">02 / Heritage Tea Cake</span>
+            <h3 class="panel-title">Slow-Roasted Mava Cake</h3>
+            <p class="panel-desc">
+              Inspired by legendary Bombay Irani bakeries. Whole milk is simmered down for six hours into rich mava, blended with cultured European butter, freshly cracked green cardamom, nutmeg, and Iranian pistachio slivers.
+            </p>
+            <div class="panel-tasting-notes">
+              <div class="note-item">
+                <span class="note-label">Texture</span>
+                <span class="note-value">Dense, Moist Crumb</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Spice Profile</span>
+                <span class="note-value">Cardamom & Nutmeg</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Serving</span>
+                <span class="note-value">500g Loaf / 1kg Round</span>
+              </div>
+            </div>
+            <div class="panel-action-row">
+              <a href="#order" class="btn-panel-inquire">Inquire For This Batch →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Panel 03: Botanical Cupcakes -->
+        <article class="collection-panel reveal-on-scroll">
+          <div class="panel-media-container">
+            <!-- PLACEHOLDER: Replace with spiced botanical cupcakes photo -->
+            <img
+              src="assets/chap3.3.jpeg"
+              alt="Rose and Saffron Botanical Cupcakes with Cream Cheese Frosting"
+              loading="lazy"
+            />
+            <span class="panel-badge">Patisserie Fusion</span>
+          </div>
+          <div class="panel-content">
+            <span class="panel-num">03 / Patisserie Fusion</span>
+            <h3 class="panel-title">Spiced Botanical Cupcakes</h3>
+            <p class="panel-desc">
+              Delicate sponge infused with wild Kannauj rose water, filled with a molten gulab jamun heart, and crowned with a whipped saffron-cream cheese quenelle and candied pistachio dust.
+            </p>
+            <div class="panel-tasting-notes">
+              <div class="note-item">
+                <span class="note-label">Texture</span>
+                <span class="note-value">Airy & Velvety</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Core Surprise</span>
+                <span class="note-value">Molten Mithai Core</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Box Size</span>
+                <span class="note-value">Box of 4 / 6 / 12</span>
+              </div>
+            </div>
+            <div class="panel-action-row">
+              <a href="#order" class="btn-panel-inquire">Inquire For This Batch →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Panel 04: Dark Cocoa Ghee Fudge -->
+        <article class="collection-panel reverse reveal-on-scroll">
+          <div class="panel-media-container">
+            <!-- PLACEHOLDER: Replace with artisanal chocolate fudge photo -->
+            <img
+              src="assets/chap3.3.png"
+              alt="70% Single Origin Cocoa and Ghee Almond Fudge"
+              loading="lazy"
+            />
+            <span class="panel-badge">Signature Confection</span>
+          </div>
+          <div class="panel-content">
+            <span class="panel-num">04 / Artisanal Confection</span>
+            <h3 class="panel-title">70% Cocoa Ghee Fudge & Barfi</h3>
+            <p class="panel-desc">
+              A decadent harmony between traditional Lonawala walnut fudge and Parisian ganache. Blends 70% single-origin dark chocolate, slow-churned cashew praline, sea salt flakes, and roasted Mamra almonds.
+            </p>
+            <div class="panel-tasting-notes">
+              <div class="note-item">
+                <span class="note-label">Texture</span>
+                <span class="note-value">Silky Melt-in-Mouth</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Cacao Origin</span>
+                <span class="note-value">Idukki Valley 70%</span>
+              </div>
+              <div class="note-item">
+                <span class="note-label">Box Size</span>
+                <span class="note-value">300g / 600g Gift Box</span>
+              </div>
+            </div>
+            <div class="panel-action-row">
+              <a href="#order" class="btn-panel-inquire">Inquire For This Batch →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CHAPTER 04: CRAFT TENETS (SEQUENTIAL SCROLL REVEALS)
+       ========================================================================== -->
+  <section class="tenets-section" id="tenets" data-chapter-index="04" data-chapter-name="CRAFT TENETS" data-theme="dark">
+    <div class="container">
+      <div class="tenets-layout">
+
+        <div class="tenets-sticky-intro reveal-on-scroll">
+          <span class="chapter-tag">Chapter 04 • The Artisan's Code</span>
+          <h2 class="section-headline">Our Uncompromising <em>Tenets</em></h2>
+          <p>
+            In an era of mass industrial confections, we treat sweets as edible artistry. Every recipe honors four foundational principles.
+          </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="#order" class="btn-primary" style="background-color: var(--color-turmeric); color: var(--color-cocoa-deep);">
+              Reserve Today's Batch
+            </a>
+          </div>
+        </div>
+
+        <div class="tenets-list">
+
+          <div class="tenet-card reveal-on-scroll">
+            <div class="tenet-header">
+              <span class="tenet-number">TENET 01</span>
+              <h3 class="tenet-title">Micro-Batch Integrity</h3>
+            </div>
+            <p class="tenet-description">
+              We never cook in industrial kettles. Every mava batch is reduced in traditional brass vats, yielding just 24 signature boxes per day so every single piece is inspected personally by our chefs.
+            </p>
+          </div>
+
+          <div class="tenet-card reveal-on-scroll reveal-delay-1">
+            <div class="tenet-header">
+              <span class="tenet-number">TENET 02</span>
+              <h3 class="tenet-title">Single-Estate & Terroir Sourcing</h3>
+            </div>
+            <p class="tenet-description">
+              From hand-picked Kashmiri saffron stigmas and Kolhapur jaggery to Coorg cardamom pods and Kerala single-origin cacao, our provenance is clean, honest, and traceable.
+            </p>
+          </div>
+
+          <div class="tenet-card reveal-on-scroll reveal-delay-2">
+            <div class="tenet-header">
+              <span class="tenet-number">TENET 03</span>
+              <h3 class="tenet-title">Cultured A2 Cow Ghee & Whole Dairy</h3>
+            </div>
+            <p class="tenet-description">
+              Zero palm oil, zero vegetable margarine, zero synthetic dairy whiteners. We exclusively use bilona-churned A2 cow ghee and slow-simmered farm-fresh whole milk.
+            </p>
+          </div>
+
+          <div class="tenet-card reveal-on-scroll reveal-delay-3">
+            <div class="tenet-header">
+              <span class="tenet-number">TENET 04</span>
+              <h3 class="tenet-title">Made to Order, Same-Day Dispatch</h3>
+            </div>
+            <p class="tenet-description">
+              Sweets lose their soul when stored on supermarket shelves. Your box is prepared the exact morning of your courier dispatch or pickup window.
+            </p>
+          </div>
+
+          <div class="tenet-card reveal-on-scroll">
+            <div class="tenet-header">
+              <span class="tenet-number">TENET 05</span>
+              <h3 class="tenet-title">Bespoke Festive Curation</h3>
+            </div>
+            <p class="tenet-description">
+              Custom foil-stamped gift sleeves, personalized handwritten calligraphy notes, and balanced pairings tailored for Diwali, weddings, and memorable milestones.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CHAPTER 05: SELECTION & GALLERY
+       ========================================================================== -->
+  <section class="gallery-section" id="gallery" data-chapter-index="05" data-chapter-name="GALLERY">
+    <div class="container">
+      <div class="section-header-compact reveal-on-scroll">
+        <span class="chapter-tag">Chapter 05 • The Tasting Showcase</span>
+        <h2 class="section-headline">Individual creations & <em>tasting boxes</em></h2>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="gallery-filter-bar reveal-on-scroll" role="tablist" aria-label="Filter sweets by category">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Delicacies</button>
+        <button class="filter-btn" data-filter="modak" role="tab" aria-selected="false">Modak</button>
+        <button class="filter-btn" data-filter="bakes" role="tab" aria-selected="false">Mava Bakes</button>
+        <button class="filter-btn" data-filter="fudge" role="tab" aria-selected="false">Fudge & Barfi</button>
+        <button class="filter-btn" data-filter="hampers" role="tab" aria-selected="false">Curated Hampers</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid">
+
+        <!-- Item 1 -->
+        <div class="gallery-card reveal-on-scroll" data-category="modak">
+          <div class="gallery-card-img-wrap">
+            <!-- PLACEHOLDER: Saffron Steamed Modak -->
+            <img src="assets/chap5.1.png" alt="Kesar Ukadiche Modak with Saffron strands" loading="lazy" />
+            <span class="gallery-tag">Freshly Steamed</span>
+          </div>
+          <div class="gallery-card-body">
+            <div>
+              <h4 class="gallery-item-title">Kesar Ukadiche Modak</h4>
+              <p class="gallery-item-caption">Steamed rice dough infused with saffron, stuffed with fresh coconut and nutmeg-spiced jaggery.</p>
+            </div>
+            <div class="gallery-card-footer">
+              <span class="gallery-spec">Box of 11 • ₹750</span>
+              <a href="#order" class="gallery-select-link">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="gallery-card reveal-on-scroll reveal-delay-1" data-category="bakes">
+          <div class="gallery-card-img-wrap">
+            <!-- PLACEHOLDER: Cardamom Mava Loaf -->
+            <img src="assets/chap5.2.png" alt="Traditional Cardamom and Pistachio Mava Cake Loaf" loading="lazy" />
+            <span class="gallery-tag">Best with Chai</span>
+          </div>
+          <div class="gallery-card-body">
+            <div>
+              <h4 class="gallery-item-title">Cardamom Mava Tea Loaf</h4>
+              <p class="gallery-item-caption">Golden slow-cooked mava loaf, studded with roasted pistachio and kissed with pure nutmeg.</p>
+            </div>
+            <div class="gallery-card-footer">
+              <span class="gallery-spec">500g Loaf • ₹650</span>
+              <a href="#order" class="gallery-select-link">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="gallery-card reveal-on-scroll reveal-delay-2" data-category="fudge">
+          <div class="gallery-card-img-wrap">
+            <!-- PLACEHOLDER: Dark Chocolate Almond Fudge -->
+            <img src="assets/chap5.3.png" alt="Dark Chocolate Roasted Nut Ghee Fudge" loading="lazy" />
+            <span class="gallery-tag">Single Origin</span>
+          </div>
+          <div class="gallery-card-body">
+            <div>
+              <h4 class="gallery-item-title">70% Cacao Ghee Fudge</h4>
+              <p class="gallery-item-caption">Rich molten cocoa fudge cooked down with A2 cow ghee and roasted Mamra almond slivers.</p>
+            </div>
+            <div class="gallery-card-footer">
+              <span class="gallery-spec">350g Box • ₹580</span>
+              <a href="#order" class="gallery-select-link">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="gallery-card reveal-on-scroll" data-category="bakes">
+          <div class="gallery-card-img-wrap">
+            <!-- PLACEHOLDER: Gulab Jamun Cupcake -->
+            <img src="assets/chap5.4.png" alt="Rose Water & Gulab Jamun Core Cupcake" loading="lazy" />
+            <span class="gallery-tag">Signature Patisserie</span>
+          </div>
+          <div class="gallery-card-body">
+            <div>
+              <h4 class="gallery-item-title">Rosewater & Jamun Cupcake</h4>
+              <p class="gallery-item-caption">Vanilla sponge with a tender gulab jamun baked in the center, finished with saffron cream.</p>
+            </div>
+            <div class="gallery-card-footer">
+              <span class="gallery-spec">Box of 6 • ₹520</span>
+              <a href="#order" class="gallery-select-link">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="gallery-card reveal-on-scroll reveal-delay-1" data-category="hampers">
+          <div class="gallery-card-img-wrap">
+            <!-- PLACEHOLDER: Luxury Festive Hamper -->
+            <img src="assets/chap5.5.jpg" alt="Bespoke Festive Wooden Gifting Box with Ribbon" loading="lazy" />
+            <span class="gallery-tag">Handcrafted Box</span>
+          </div>
+          <div class="gallery-card-body">
+            <div>
+              <h4 class="gallery-item-title">The Royal Priti Hamper</h4>
+              <p class="gallery-item-caption">A collection of 6 modaks, 1 mava loaf, 200g chocolate fudge, and roasted spiced nuts.</p>
+            </div>
+            <div class="gallery-card-footer">
+              <span class="gallery-spec">Gift Hamper • ₹950</span>
+              <a href="#order" class="gallery-select-link">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="gallery-card reveal-on-scroll reveal-delay-2" data-category="modak">
+          <div class="gallery-card-img-wrap">
+            <!-- PLACEHOLDER: Chocolate & Hazelnut Modak -->
+            <img src="assets/chap5.6.jpeg" alt="Dark Chocolate Mava Modak with Praline" loading="lazy" />
+            <span class="gallery-tag">Contemporary Craft</span>
+          </div>
+          <div class="gallery-card-body">
+            <div>
+              <h4 class="gallery-item-title">Dark Chocolate Mava Modak</h4>
+              <p class="gallery-item-caption">Slow-cooked mava molded with roasted cacao nibs, hazelnut praline, and dusted with 24k gold leaf.</p>
+            </div>
+            <div class="gallery-card-footer">
+              <span class="gallery-spec">Box of 11 • ₹890</span>
+              <a href="#order" class="gallery-select-link">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CHAPTER 06: CONTACT / BESPOKE ORDER
+       ========================================================================== -->
+  <section class="order-section" id="order" data-chapter-index="06" data-chapter-name="BESPOKE ORDER">
+    <div class="container">
+      <div class="section-header-compact reveal-on-scroll">
+        <span class="chapter-tag">Chapter 06 • Direct Inquiries</span>
+        <h2 class="section-headline">Reserve your <em>fresh batch</em></h2>
+      </div>
+
+      <div class="order-layout-grid">
+
+        <!-- Left: Direct Channels & Studio Information -->
+        <div class="order-info-column reveal-on-scroll">
+          <p class="about-paragraph">
+            Because our confections are baked and steamed fresh each morning with zero chemical shelf-life extenders, we accept orders via WhatsApp concierge or Instagram direct message.
+          </p>
+
+          <div class="order-direct-channels">
+            <a href="https://wa.me/919820045678?text=Hello%20AVANI%2C%20I%20would%20like%20to%20inquire%20about%20ordering%20a%20fresh%20mithai%20batch." target="_blank" rel="noopener noreferrer" class="channel-box" aria-label="Order via WhatsApp Concierge">
+              <div class="channel-icon">
+                <img src="assets/whatsapp.jpeg" alt="WhatsApp" />
+              </div>
+              <h4 class="channel-title">WhatsApp Concierge</h4>
+              <p class="channel-desc">Immediate booking for next-day dispatch, wedding assortments, and custom boxes.</p>
+              <span class="channel-action">Message on WhatsApp →</span>
+            </a>
+
+            <a href="https://www.instagram.com/pritispuremagic/" target="_blank" rel="noopener noreferrer" class="channel-box" aria-label="Connect on Instagram">
+              <div class="channel-icon">
+                <img src="assets/instagram.jpeg" alt="Instagram" />
+              </div>
+              <h4 class="channel-title">Instagram DM</h4>
+              <p class="channel-desc">Follow daily baking stories, festive drops, and place your pre-orders directly.</p>
+              <span class="channel-action">@PritisPureMagic →</span>
+            </a>
+          </div>
+
+          <div style="margin-top: 1rem; padding: 1.5rem; background-color: var(--color-cream); border: 1px solid var(--color-border); border-radius: 2px;">
+            <h5 style="font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.5rem;">Kitchen Studio & Dispatch</h5>
+            <p style="font-size: 0.88rem; color: var(--color-cocoa-light); line-height: 1.6;">
+              Studio 4B, Pali Hill Lane, Bandra West, Mumbai 400050<br/>
+              <strong>Dispatch Times:</strong> Mon – Sun, 9:00 AM – 7:00 PM (Pre-orders only)
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Pre-order Message Builder -->
+        <div class="order-form-card reveal-on-scroll reveal-delay-1">
+          <h3 class="form-title">Pre-Order Inquiries</h3>
+          <p class="form-subtitle">Fill in your preferences to generate a ready-to-send WhatsApp order draft.</p>
+
+          <form class="inquiry-form" id="orderInquiryForm" onsubmit="event.preventDefault(); handleOrderSubmit();">
+            <div class="form-group">
+              <label for="clientName" class="form-label">Your Name</label>
+              <input type="text" id="clientName" class="form-input" placeholder="e.g. Priyanshi Mehta" required />
+            </div>
+
+            <div class="form-group">
+              <label for="deliveryDate" class="form-label">Required Delivery / Event Date</label>
+              <input type="date" id="deliveryDate" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label for="productSelection" class="form-label">Primary Selection</label>
+              <select id="productSelection" class="form-select">
+                <option value="Ukadiche & Kesar Modak Platter">Ukadiche & Kesar Modak Platter</option>
+                <option value="Cardamom Mava Tea Loaf">Cardamom Mava Tea Loaf</option>
+                <option value="70% Cocoa Ghee Fudge Gift Box">70% Cocoa Ghee Fudge Gift Box</option>
+                <option value="Botanical Cupcakes Assortment">Botanical Cupcakes Assortment</option>
+                <option value="The Royal Priti Hamper (Mixed Box)">The Royal Priti Hamper (Mixed Box)</option>
+                <option value="Custom Wedding / Bulk Gifting">Custom Wedding / Bulk Gifting</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="boxQuantity" class="form-label">Estimated Box Count</label>
+              <input type="number" id="boxQuantity" class="form-input" placeholder="e.g. 2" min="1" value="1" required />
+            </div>
+
+            <div class="form-group">
+              <label for="specialNotes" class="form-label">Special Notes / Dietary Preferences</label>
+              <textarea id="specialNotes" class="form-textarea" placeholder="e.g. Extra cardamom, eggless, gift ribbon with personalized message..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+              Launch WhatsApp Inquiry Draft ↗
+            </button>
+
+            <p class="form-notice">
+              * Clicking above will open WhatsApp with your pre-filled inquiry details ready for instant confirmation.
+            </p>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- RESERVED FOR FUTURE E-COMMERCE CART ENGINE -->
+      <!-- ==========================================================================
+           FUTURE CART PLACEHOLDER EXTENSION
+           This structure is cleanly isolated so a shopping cart / Stripe / Razorpay
+           checkout module can mount here without refactoring the page hierarchy.
+           ========================================================================== -->
+      <div class="cart-future-placeholder reveal-on-scroll">
+        <div class="cart-placeholder-info">
+          <h5>Instant Online Checkout (Coming Festive Season)</h5>
+          <p>We are currently integrating automated local courier delivery and instant card payments.</p>
+        </div>
+        <div class="cart-engine-badge">Engine Slot Ready • v1.0 Live Concierge</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="footer-brand-title">Pritis Pure Magic</div>
+          <p class="footer-tagline">
+            Artisanal Indian mithai, mava tea cakes, spiced patisserie, and single-estate fudge cooked with reverence in small batches.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Chapters</h5>
+          <ul class="footer-links-list">
+            <li><a href="#hero">01 Hero Entrance</a></li>
+            <li><a href="#story">02 Kitchen & Heritage</a></li>
+            <li><a href="#collection">03 The Sweet Collection</a></li>
+            <li><a href="#tenets">04 Artisan Tenets</a></li>
+            <li><a href="#gallery">05 Tasting Showcase</a></li>
+            <li><a href="#order">06 Bespoke Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul class="footer-links-list">
+            <li><a href="https://wa.me/919820045678" target="_blank" rel="noopener">WhatsApp Direct</a></li>
+            <li><a href="https://www.instagram.com/pritispuremagic/" target="_blank" rel="noopener">Instagram (@pritispuremagic)</a></li>
+            <li><a href="mailto:hello@pritispuremagic.com">hello@pritispuremagic.com</a></li>
+            <li><a href="#order">Custom Wedding Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>© 2026 <em>Pritis Pure Magic</em> All rights reserved.</p>
+        <p>Made with cultured ghee, fresh spices, and love in Bandra, Mumbai.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       CLIENT SCRIPT: INTERSECTION OBSERVER, SCROLL JACKING, CHAPTER RAIL, DRAWER
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Header scroll state
+      const siteHeader = document.getElementById('siteHeader');
+      const headerChapterNum = document.getElementById('headerChapterNum');
+      const headerChapterName = document.getElementById('headerChapterName');
+      const chapterSections = document.querySelectorAll('[data-chapter-index]');
+      const railItems = document.querySelectorAll('.rail-item');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          siteHeader.classList.add('scrolled');
+        } else {
+          siteHeader.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      // 2. Active Chapter Tracking via IntersectionObserver
+      const chapterObserverOptions = {
+        root: null,
+        rootMargin: '-30% 0px -40% 0px',
+        threshold: 0
+      };
+
+      const chapterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = entry.target.getAttribute('data-chapter-index');
+            const name = entry.target.getAttribute('data-chapter-name');
+            const theme = entry.target.getAttribute('data-theme');
+
+          // Update top header indicator
+          if (headerChapterNum && headerChapterName) {
+            headerChapterNum.textContent = index;
+            headerChapterName.textContent = name;
+          }
+
+          // Update side rail active item
+          railItems.forEach(item => {
+            if (item.getAttribute('data-chapter') === index) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          });
+
+          // Toggle rail theme based on current section
+          const chapterRailEl = document.getElementById('chapterRail');
+          if (chapterRailEl) {
+            if (theme === 'dark') {
+              chapterRailEl.classList.add('on-dark');
+            } else {
+              chapterRailEl.classList.remove('on-dark');
+            }
+          }
+        }
+      });
+      }, chapterObserverOptions);
+
+      chapterSections.forEach(sec => chapterObserver.observe(sec));
+
+      // 3. Reveal on Scroll Animation System
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      const revealObserverOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.1
+      };
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, revealObserverOptions);
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      // 4. Chapter Drawer Overlay Menu Toggle
+      const menuToggleBtn = document.getElementById('menuToggleBtn');
+      const chapterDrawer = document.getElementById('chapterDrawer');
+      const drawerCloseLinks = document.querySelectorAll('[data-close-drawer]');
+
+      function toggleDrawer() {
+        const isOpen = chapterDrawer.classList.contains('open');
+        if (isOpen) {
+          chapterDrawer.classList.remove('open');
+          menuToggleBtn.classList.remove('open');
+          menuToggleBtn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        } else {
+          chapterDrawer.classList.add('open');
+          menuToggleBtn.classList.add('open');
+          menuToggleBtn.setAttribute('aria-expanded', 'true');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      menuToggleBtn.addEventListener('click', toggleDrawer);
+      drawerCloseLinks.forEach(link => link.addEventListener('click', toggleDrawer));
+
+      // Close on Escape key
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && chapterDrawer.classList.contains('open')) {
+          toggleDrawer();
+        }
+      });
+
+      // 5. Gallery Filter Logic
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryCards = document.querySelectorAll('.gallery-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+
+          const category = btn.getAttribute('data-filter');
+
+          galleryCards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+              card.style.display = 'flex';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+              }, 20);
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+
+    // 6. WhatsApp Inquiry Generator
+    function handleOrderSubmit() {
+      const name = document.getElementById('clientName').value.trim();
+      const date = document.getElementById('deliveryDate').value;
+      const selection = document.getElementById('productSelection').value;
+      const quantity = document.getElementById('boxQuantity').value;
+      const notes = document.getElementById('specialNotes').value.trim();
+
+      const messageText = `Namaste Priti's Bakehouse,\n\nI would like to inquire about placing a fresh order:\n\n• Name: ${name}\n• Required Date: ${date}\n• Item: ${selection}\n• Quantity: ${quantity} box(es)\n${notes ? `• Special Notes: ${notes}\n` : ''}\nPlease let me know batch availability and payment details. Thank you!`;
+
+      const encodedMessage = encodeURIComponent(messageText);
+      const whatsappUrl = `https://wa.me/919820045678?text=${encodedMessage}`;
+
+      window.open(whatsappUrl, '_blank');
+    }
+  </script>
+</body>
+</html>
